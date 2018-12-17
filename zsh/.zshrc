@@ -81,11 +81,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='mvim'
-fi
+export EDITOR='vim'
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
@@ -110,6 +106,8 @@ alias please='sudo $(fc -ln -1)'
 alias fuck='sudo $(fc -ln -1)'
 alias fk='sudo $(fc -ln -1)'
 
+alias psqlPort="ss -lpn | grep 'postgresql' | grep -oP '\d+' | sed -n '3p'"
+
 alias l='ls -lsh --color=auto'
 alias lf='ls -A --color=auto'
 alias lfh='ls -Alsh --color=auto'
@@ -118,9 +116,12 @@ alias bashrc='vim ~/.bashrc'
 alias zshrc='vim ~/.zshrc'
 alias i3config='vim ~/.config/i3/config'
 
+alias xclip='xclip -selection clipboard'
+
 # my common typos
 alias clera='clear'
 alias claer='clear'
+alias cler='clear'
 
 # JetBrains
 alias box="/home/lidor/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox & disown"
@@ -143,7 +144,7 @@ screenshot()
 	if [ "$#" -ne 2 ]; then
 		scrot ~/Pictures/$1;
 	else
-		scrot ~/Pictures/$1 -d 3 -c;
+		scrot ~/Pictures/$1 -d "$2" -c;
 	fi
         gimp ~/Pictures/$1 & disown;
 }
@@ -151,7 +152,7 @@ screenshot()
 monitors()
 {
 	if [ "$1" = "def" ] || [ "$1" = "default" ]; then
-		xrandr --output HDMI2 --off --output HDMI1 --off --output DP1 --off --output eDP1 --primary --mode 1366x768 --scale-from 1600x900 --pos 0x0 --rotate normal --output VIRTUAL1 --off;
+		xrandr --output HDMI2 --off --output HDMI1 --off --output DP1 --off --output eDP1 --primary --mode 1366x768 --scale-from 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off;
 	
 	elif [ "$1" = "home" ]; then
 		xrandr --output HDMI2 --off --output HDMI1 --primary --mode 1920x1080 --pos 1280x88 --rotate normal --output DP1 --mode 1280x1024 --pos 0x0 --rotate normal --output eDP1 --off --output VIRTUAL1 --off;

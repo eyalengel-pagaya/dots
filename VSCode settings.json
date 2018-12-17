@@ -1,0 +1,52 @@
+{
+    "window.zoomLevel": 0,
+    "files.autoSave": "afterDelay",
+    "cSpell.language": "en",
+    "editor.fontLigatures": true,
+    "[javascript]": {
+        "editor.tabSize": 4
+    },
+    "[html]": {
+        "editor.tabSize": 4
+    },
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
+    "cSpell.userWords": [
+        "af",
+        "inet",
+        "lmao",
+        "magshimim"
+    ],
+    "workbench.colorTheme": "Base16 Dark Summerfruit",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#000",
+        "panel.background": "#000",
+        "sideBar.background": "#000",
+        "editor.background": "#111",
+        "badge.background": "#999",
+        "activityBar.border": "#ff0000",
+        "activityBar.background": "#111",
+        "tab.activeBackground": "#000",
+        "tab.inactiveBackground": "#222",
+        "tab.activeForeground": "#fff",
+        "editorGroupHeader.tabsBackground": "#222",
+        "editorLineNumber.foreground": "#fff",
+        "editorLineNumber.activeForeground": "#10ff84",
+        "editorGutter.background": "#111",
+        "scrollbarSlider.background": "#555",
+    },
+    "editor.minimap.enabled": true,
+    "editor.minimap.renderCharacters": true,
+    "editor.formatOnPaste": true,
+    "editor.fontSize": 16,
+    "window.menuBarVisibility": "hidden",
+    "liveServer.settings.donotShowInfoMsg": true,
+    "liveServer.settings.donotVerifyTags": true,
+    "breadcrumbs.enabled": true,
+    "gitlens.advanced.messages": {
+        "suppressLineUncommittedWarning": true
+    }
+}

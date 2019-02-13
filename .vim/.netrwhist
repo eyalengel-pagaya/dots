@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/home/lidor/.urxvt'
-let g:netrw_dirhist_2='/home/lidor'
-let g:netrw_dirhist_3='/home/lidor/EmekYizrael-1506-BossToolKit'
-let g:netrw_dirhist_4='/home/lidor/EmekYizrael-1506-BossToolKit/testClient'
-let g:netrw_dirhist_5='/home/lidor/EmekYizrael-1506-BossToolKit/testClient/cmake-build-debug'
-let g:netrw_dirhist_6='/home/lidor/EmekYizrael-1506-BossToolKit/Server'

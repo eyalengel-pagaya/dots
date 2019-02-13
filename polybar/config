@@ -78,4 +78,4 @@ cursor-scroll = ns-resize
 
 modules-left = i3 spotify
 modules-center = date
-modules-right = pulseaudio xkeyboard wlan eth battery filesystem memory cpu temperature
+modules-right = pulseaudio xkeyboard wlan eth battery memory cpu temperature

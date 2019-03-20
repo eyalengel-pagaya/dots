@@ -1,5 +1,5 @@
 set $mod Mod4
-set $terminal termite
+set $TERMINAL termite
 
 # CUZ FUCK FIREFOX CTRL+Q
 bindsym ctrl+q true
@@ -12,7 +12,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec --no-startup-id $TERMINAL
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -110,7 +110,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -151,8 +151,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume `pacmd l
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute `pacmd list-sinks | awk '/* index:/{print $3}'` toggle
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10  # decrease screen brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10  # decrease screen brightness
 
 # window resize
 bindsym $mod+Ctrl+Right resize shrink width 1 px or 1 ppt
@@ -166,15 +166,15 @@ bindsym $mod+Shift+Ctrl+Down resize shrink height 10 px or 10 ppt
 bindsym $mod+Shift+Ctrl+Left resize grow width 10 px or 10 ppt
 
 # On Startup
-exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/space.jpg
-exec_always "setxkbmap -layout us,il && setxkbmap -option 'grp:alt_shift_toggle' & disown"
-exec_always "compton & disown"
+exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/wallhaven-325545.jpg
+exec_always --no-startup-id "setxkbmap -layout us,il && setxkbmap -option 'grp:alt_shift_toggle' & disown"
+exec_always --no-startup-id "compton & disown"
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec_always --no-startup-id killall -q -9 bat_level.sh ; /home/lidor/.config/i3/bat_level.sh
 
 # Custom Keybinds
-bindsym $mod+shift+i exec termite -e 'vim /home/lidor/.config/i3/config'
-bindsym $mod+ctrl+r exec --no-startup-id termite -e ranger
+bindsym $mod+shift+i exec $TERMINAL -e 'vim /home/lidor/.config/i3/config'
+bindsym $mod+ctrl+r exec --no-startup-id $TERMINAL -e ranger
 
 set $Locker python /home/lidor/.config/i3/i3lock_config.py /home/lidor/Pictures/Wallpapers/lock.png
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
@@ -193,19 +193,23 @@ mode "$mode_system" {
 
 bindsym $mod+shift+x mode "$mode_system"
 
+# bindsym $mod+m exec --no-startup-id opera       # firefox
+
 assign [class="Spotify"] $ws10
 for_window [class="Spotify"] move to workspace $ws10
 
 assign [class="discord"] $ws10
 for_window [class="discord"] move to workspace $ws10
 
-assign [class="VirtualBox Machine"] fullscreen enable
+for_window [class="VirtualBox Machine"] fullscreen enable
+
+for_window [title="Calculator"] floating enable
 
 # gaps
 for_window [class="^.*"] border pixel 0
 smart_gaps on
-# gaps inner 0
-# gaps outer 0
+gaps inner 10
+# gaps outer 10
 
 # monitors
 bindsym $mod+ctrl+1 exec --no-startup-id xrandr --output HDMI2 --off --output HDMI1 --off --output DP1 --off --output eDP1 --primary --mode 1366x768 --scale-from 1600x900 --pos 0x0 --rotate normal --output VIRTUAL1 --off  && ~/.config/polybar/launch.sh;
@@ -226,3 +230,9 @@ exec_always --no-startup-id nm-applet
 # exec_always 'xautolock -time 1 -locker $Locker && "systemctl suspend"'
 
 exec_always --no-startup-id xautolock -time 1  -locker "$Locker && sleep 1"-killtime 2 -killer "systemctl suspend" -detectsleep 
+
+bindsym $mod+o exec --no-startup-id '/bin/opera'
+bindsym $mod+shift+o exec --no-startup-id '/home/lidor/.config/i3/ducksearch'
+bindsym $mod+m exec --no-startup-id '/home/lidor/.config/i3/dmenu_mount'
+bindsym $mod+b exec --no-startup-id '/home/lidor/.config/i3/xqcr'
+bindsym $mod+Shift+Delete exec --no-startup-id lmc truemute; exec --no-startup-id lmc pause ; exec --no-startup-id pauseallmpv; workspace 0; exec $TERMINAL -e '/home/lidor/Games/2048.exe'; # Porno mode

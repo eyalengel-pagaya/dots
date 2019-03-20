@@ -5,8 +5,8 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/lidor/.oh-my-zsh"
-  export PATH=$PATH:/usr/local/share/npm/bin
+export ZSH="/home/lidor/.oh-my-zsh"
+export PATH=$PATH:/usr/local/share/npm/bin
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -108,9 +108,9 @@ alias fk='sudo $(fc -ln -1)'
 
 alias psqlPort="ss -lpn | grep 'postgresql' | grep -oP '\d+' | sed -n '3p'"
 
-alias l='ls -lsh --color=auto'
-alias lf='ls -lA --color=auto'
-alias lfh='ls -Alsh --color=auto'
+alias l='lsd -l --color=auto'
+alias lf='lsd -la --color=auto'
+alias lfh='lsd -la --color=auto'
 
 alias bashrc='vim ~/.bashrc'
 alias zshrc='vim ~/.zshrc'
@@ -130,7 +130,7 @@ alias cd..='cd ..'
 # JetBrains
 alias box="/home/lidor/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox & disown"
 
-alias ls='ls --color=auto'
+alias ls='l --color=auto'
 alias df='df -h' # Human readable sizes
 alias cp='cp -i' # Ask for confirmation before overwriting
 alias free='free -m' # Show sizes in MBs

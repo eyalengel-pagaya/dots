@@ -55,7 +55,7 @@ font-3 = "Font Awesome 5 Free:style=Solid"
 font-4 = "Font Awesome 5 Free:style=Regular"
 font-5 = "Font Awesome 5 Brands:style=Regular"
 
-separator = |
+/* separator = | */
 
 tray-position = right
 tray-padding = 2
@@ -78,4 +78,5 @@ cursor-scroll = ns-resize
 
 modules-left = i3 spotify
 modules-center = date
-modules-right = pulseaudio xkeyboard wlan eth battery memory cpu temperature
+/* modules-right = pulseaudio xkeyboard wlan eth battery memory cpu temperature */
+modules-right = pulseaudio xkeyboard wlan battery eth 

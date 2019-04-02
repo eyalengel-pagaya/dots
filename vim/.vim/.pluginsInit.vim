@@ -5,37 +5,43 @@
     set rtp+=~/.vim/bundle/Vundle.vim
     call vundle#begin()
 
+" Package managers
     Plugin 'VundleVim/Vundle.vim'
-    Plugin 'tpope/vim-fugitive'
-    Plugin 'git://git.wincent.com/command-t.git'
-    Plugin 'KabbAmine/vCoolor.vim'
-    Plugin 'altercation/vim-colors-solarized'
-    Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-    Plugin 'mattn/emmet-vim'
+
+" IDE plugins
+    Plugin 'Valloric/YouCompleteMe'
     Plugin 'scrooloose/nerdtree'
     Plugin 'tpope/vim-surround'
-    Plugin 'Valloric/YouCompleteMe'
-    Plugin 'benmills/vimux'
     Plugin 'scrooloose/nerdcommenter'
     Plugin 'ctrlpvim/ctrlp.vim'
-    Plugin 'w0rp/ale'
-    " Plugin 'Chiel92/vim-autoformat'
-    Plugin 'sbdchd/neoformat'
+    Plugin 'benmills/vimux'
+    Plugin 'terryma/vim-multiple-cursors'
+    Plugin 'tpope/vim-fugitive'
+    Plugin 'git://git.wincent.com/command-t.git'
+    Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
+" Style plugins
+    Plugin 'KabbAmine/vCoolor.vim'
+    Plugin 'altercation/vim-colors-solarized'
+    Plugin 'vim-airline/vim-airline'
+    Plugin 'vim-airline/vim-airline-themes'
+    Plugin 'junegunn/goyo.vim'
+
+" Format
+    Plugin 'w0rp/ale'
+    Plugin 'sbdchd/neoformat'
+    Plugin 'PotatoesMaster/i3-vim-syntax'
+    " Plugin 'Chiel92/vim-autoformat'
+
+" Python
+    Plugin 'python-mode/python-mode'
+
+" Web Plugins
+    Plugin 'mattn/emmet-vim'
     Plugin 'mxw/vim-jsx'
     Plugin 'ianks/vim-tsx'
     Plugin 'leafgarland/typescript-vim'
     Plugin 'peitalin/vim-jsx-typescript'
-
-    Plugin 'python-mode/python-mode'
-
-    Plugin 'vim-airline/vim-airline'
-    Plugin 'vim-airline/vim-airline-themes'
-
-    Plugin 'terryma/vim-multiple-cursors'
-
-    Plugin 'junegunn/goyo.vim'
-   Plugin 'PotatoesMaster/i3-vim-syntax'
 
     call vundle#end()            " required
     filetype plugin indent on    " required

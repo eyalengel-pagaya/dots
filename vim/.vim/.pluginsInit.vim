@@ -13,24 +13,24 @@
     Plugin 'scrooloose/nerdtree'
     Plugin 'tpope/vim-surround'
     Plugin 'scrooloose/nerdcommenter'
-    Plugin 'ctrlpvim/ctrlp.vim'
-    Plugin 'benmills/vimux'
-    Plugin 'terryma/vim-multiple-cursors'
-    Plugin 'tpope/vim-fugitive'
-    Plugin 'git://git.wincent.com/command-t.git'
-    Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+    " Plugin 'ctrlpvim/ctrlp.vim'
+    " Plugin 'benmills/vimux'
+    " Plugin 'terryma/vim-multiple-cursors'
+    " Plugin 'tpope/vim-fugitive'
+    " Plugin 'git://git.wincent.com/command-t.git'
+    " Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " Style plugins
     Plugin 'KabbAmine/vCoolor.vim'
     Plugin 'altercation/vim-colors-solarized'
     Plugin 'vim-airline/vim-airline'
     Plugin 'vim-airline/vim-airline-themes'
-    Plugin 'junegunn/goyo.vim'
+    " Plugin 'junegunn/goyo.vim'
 
 " Format
     Plugin 'w0rp/ale'
-    Plugin 'sbdchd/neoformat'
     Plugin 'PotatoesMaster/i3-vim-syntax'
+    " Plugin 'sbdchd/neoformat'
     " Plugin 'Chiel92/vim-autoformat'
 
 " Python
@@ -42,6 +42,7 @@
     Plugin 'ianks/vim-tsx'
     Plugin 'leafgarland/typescript-vim'
     Plugin 'peitalin/vim-jsx-typescript'
+    Plugin 'ap/vim-css-color'
 
     call vundle#end()            " required
     filetype plugin indent on    " required
@@ -76,8 +77,6 @@
     " autocmd BufWrite,BufRead * :AutoFormat
     " noremap <F6> :AutoFormat<CR>
     " inoremap <F6> :AutoFormat<CR>
-    let g:ale_fix_on_save = 1
-    let g:ale_completion_enabled = 1
 
 
 " Python mode

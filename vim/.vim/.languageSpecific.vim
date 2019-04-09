@@ -11,6 +11,9 @@
     autocmd FileType c,cpp iabbrev incl #include "<++>"<esc>0<C-j>
     autocmd FileType c,cpp iabbrev for for(int<++> = 0; <++> < <++>; <++>++)<CR>{<CR>}<esc>O<esc>2k0=4j<C-j>
 
+    autocmd FileType c,cpp let g:ale_fix_on_save = 1
+    autocmd FileType c,cpp let g:ale_completion_enabled = 1
+
 " C-Only snippets
     autocmd FileType c iabbrev c printf(<++>);<esc>0<C-j><esc>
 
@@ -30,21 +33,28 @@
 """"""""""""""""
 "   Web shit   "
 """"""""""""""""
-    :let g:user_emmet_install_global = 0
+    let g:user_emmet_install_global = 0
 
     autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript         " Treat tsx and jsx as ts and js
+
+    " <div>
+    " <div>
+    " <div>
+    " <div>
 
     autocmd FileType html,css,js,jsx,ts,tsx,typescript EmmetInstall
     autocmd FileType html,css,js,jsx,ts,tsx,typescript nnoremap <buffer><C-j> /<.*><Enter>f>:noh<return>
     autocmd FileType html,css,js,jsx,ts,tsx,typescript inoremap <buffer><C-j> <esc><esc>/<.*><Enter>f>:noh<return>a
+    autocmd FileType html,css,js,jsx,ts,tsx,typescript nnoremap <buffer><C-k> /<.*><Enter>2Nf>:noh<return>
+    autocmd FileType html,css,js,jsx,ts,tsx,typescript inoremap <buffer><C-k> <esc><esc>/<.*><Enter>2Nf>:noh<return>a
     autocmd FileType ts noremap <buffer> <F5> :wa <bar> :VimuxRunCommand("tsc " . expand('%'))<CR>
-    autocmd filetype js,jsx,ts,tsx,typescript let g:ale_fixers = ['prettier', 'eslint']
+    " autocmd filetype js,jsx,ts,tsx,typescript let g:ale_fixers = ['prettier', 'eslint']
 
     let g:colorizer_auto_filetype = 'ts,tsx,typescript,js,jsx,css,html'    " Colorize hex colors by default
     let g:previm_open_cmd = 'firefox-developer-edition'                    " Open markdown preview in Firefox
 
 " Snippets
-    autocmd FileType js,jsx,ts,tsx,typescript,html iabbrev clog console.log();<esc>
+    autocmd FileType js,jsx,ts,tsx,typescript,html iabbrev clog console.log(<++>);<esc>
 
 
 """""""""""""

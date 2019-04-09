@@ -2,7 +2,7 @@
 
 # Gives a dmenu prompt to search DuckDuckGo.
 # Without input, will open DuckDuckGo.com.
-# URLs will be directly handed to opera.
+# URLs will be directly handed to firefox.
 # Anything else, it search it.
 
 pgrep -x dmenu && exit
@@ -10,12 +10,12 @@ pgrep -x dmenu && exit
 choice=$(echo "🦆" | dmenu -i -p "Search DuckDuckGo:") || exit 1
 
 if [ "$choice" = "🦆"  ]; then
-    opera "https://duckduckgo.com"
+    firefox "https://duckduckgo.com"
 else
     # Detect if url
     if [[ "$choice" =~ ^(http:\/\/|https:\/\/)?[a-zA-Z0-9]+\.[a-zA-Z]+(/)?.*$ ]]; then
-        opera "$choice"
+        firefox "$choice"
     else
-        opera "https://duckduckgo.com/?q=$choice&t=ffab&atb=v1-1"
+        firefox "https://duckduckgo.com/?q=$choice&t=ffab&atb=v1-1"
     fi
 fi

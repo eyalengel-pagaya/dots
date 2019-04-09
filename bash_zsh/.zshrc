@@ -157,7 +157,7 @@ monitors()
 {
 	if [ "$1" = "def" ] || [ "$1" = "default" ]; then
 		xrandr --output HDMI2 --off --output HDMI1 --off --output DP1 --off --output eDP1 --primary --mode 1366x768 --scale-from 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off;
-	
+
 	elif [ "$1" = "home" ]; then
 		xrandr --output HDMI2 --off --output HDMI1 --primary --mode 1920x1080 --pos 1280x88 --rotate normal --output DP1 --mode 1280x1024 --pos 0x0 --rotate normal --output eDP1 --off --output VIRTUAL1 --off;
 
@@ -186,3 +186,9 @@ wifi()
 		fi
 	fi
 }
+
+# start bicon for Biderctional text
+alias exit='kill -9 $(ps -p $PPID -o ppid=)'
+if ! [[ "$(ps -p $(ps -p $(echo $$) -o ppid=) -o comm=)" =~ 'bicon'* ]]; then
+    bicon.bin
+fi

@@ -120,6 +120,8 @@ alias xclip='xclip -selection clipboard'
 
 alias copy='tar cvfz - "$1" | (cd "$2"; tar xvfz -)'
 
+alias neofetch='neofetch --ascii ~/.config/neofetch/shrekscii --ascii_colors 2 5 6 1'
+
 # my common typos
 alias clera='clear'
 alias claer='clear'

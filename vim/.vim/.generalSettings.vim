@@ -78,3 +78,5 @@
 " Toggle spell-checker
     map <F6> :set spell!<CR>
 
+" Make Y yank to end of line (just like D and C act)
+    nnoremap Y y$

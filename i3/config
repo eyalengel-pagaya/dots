@@ -217,8 +217,11 @@ bindsym $mod+ctrl+2 exec --no-startup-id xrandr --output HDMI2 --off --output HD
 bindsym $mod+ctrl+3 exec --no-startup-id xrandr --output HDMI2 --off --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP1 --off --output eDP1 --off --output VIRTUAL1 --off && ~/.config/polybar/launch.sh;
 
 # screenshot
-bindsym --release Print exec import -silent "/home/lidor/Pictures/Screenshots/$(date '+%d.%m.%Y-%T').png" 
-bindsym --release shift+Print exec import -silent -window root "/home/lidor/Pictures/Screenshots/$(date '+%d.%m.%Y-%T').png" 
+# maim -su | convert - \( +clone -background black -shadow 80x20+0+15 \) +swap -background transparent -layers merge +repage png:- | xclip -selection clipboard -t image/png
+bindsym --release Print exec maim -su "/home/lidor/Pictures/Screenshots/$(date '+%d.%m.%Y-%T').png"
+bindsym --release shift+Print exec maim "/home/lidor/Pictures/Screenshots/$(date '+%d.%m.%Y-%T').png" 
+bindsym --release ctrl+Print exec maim -su | xclip -selection clipboard -t image/png
+bindsym --release ctrl+shift+Print exec maim | xclip -selection clipboard -t image/png
 
 # Rofi 
 bindsym --release Mod1+Tab exec rofi -combi-modi window -show window -theme solarized-darker -font "System San Francisco Display 12" -no-fixed-num-lines -display-window ">>> "

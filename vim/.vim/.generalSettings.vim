@@ -80,3 +80,7 @@
 
 " Make Y yank to end of line (just like D and C act)
     nnoremap Y y$
+
+" Map <C-space> to find and replace the next <++>
+    nnoremap <C-space> /<++><Enter>"_d4l:noh<return>i
+    inoremap <C-space> <esc><esc>/<++><Enter>"_d4l:noh<return>i

@@ -18,10 +18,10 @@ bindsym $mod+Return exec --no-startup-id $TERMINAL
 bindsym $mod+Shift+q kill
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -30,10 +30,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -42,7 +42,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+g split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -224,8 +224,8 @@ bindsym --release ctrl+Print exec maim -su | xclip -selection clipboard -t image
 bindsym --release ctrl+shift+Print exec maim | xclip -selection clipboard -t image/png
 
 # Rofi 
-bindsym --release Mod1+Tab exec rofi -combi-modi window -show window -theme solarized-darker -font "System San Francisco Display 12" -no-fixed-num-lines -display-window ">>> "
-bindsym --release $mod+d exec rofi -combi-modi drun -show drun -theme solarized-darker -lines 15 -font "System San Francisco Display 12" -display-drun ">>> "
+bindsym --release Mod1+Tab exec rofi -combi-modi window -show window -theme solarized-darker -show-icons -font "System San Francisco Display 12" -no-fixed-num-lines -display-window ">>> "
+bindsym --release $mod+d exec rofi -combi-modi drun -show drun -theme solarized-darker -lines 15 -show-icons -font "System San Francisco Display 12" -display-drun ">>> "
 
 # nm-applet
 exec_always --no-startup-id nm-applet

@@ -13,6 +13,7 @@
     Plugin 'scrooloose/nerdtree'
     Plugin 'tpope/vim-surround'
     Plugin 'scrooloose/nerdcommenter'
+    Plugin 'neoclide/coc.nvim', {'do': './install.sh nightly'}
     " Plugin 'ctrlpvim/ctrlp.vim'
     " Plugin 'benmills/vimux'
     " Plugin 'terryma/vim-multiple-cursors'

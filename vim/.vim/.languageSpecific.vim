@@ -24,6 +24,7 @@
 """"""""""""""
 "   Python   "
 """"""""""""""
+    autocmd BufNewFile *.py,*.pyw 0r ~/.vim/skeletons/main.py
     autocmd FileType python nnoremap <buffer> <leader>l :PymodeLintAuto<CR>
     autocmd BufRead *.py,*.pyw :PymodeLint
 

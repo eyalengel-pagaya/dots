@@ -1,9 +1,10 @@
 [options]
-#allow_bold = true
+allow_bold = true
 #audible_bell = false
 clickable_url = true
 #dynamic_title = true
-font = Source Code Pro for Powerline 10
+; font = Source Code Pro for Powerline 24
+font = 10
 #fullscreen = true
 #geometry = 640x480
 #icon_name = terminal
@@ -113,7 +114,8 @@ color15 = #c5c8c6
 
 
 [hints]
-font = Source Code Pro for Powerline 14
+; font = Source Code Pro for Powerline 24
+font = 24
 #foreground = #dcdccc
 #background = #3f3f3f
 #active_foreground = #e68080

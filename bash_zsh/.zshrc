@@ -1,3 +1,5 @@
+export LANG=en_US.UTF-8
+
 # sources
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
@@ -7,6 +9,14 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Path to your oh-my-zsh installation.
 export ZSH="/home/lidor/.oh-my-zsh"
 export PATH=$PATH:/usr/local/share/npm/bin
+export PATH=$PATH:~/.local/bin/
+
+export PATH=$PATH:~/Shared/scripts/
+for dir in ~/Shared/scripts/*/; do
+    if [ ! $(echo $PATH | grep -o $dir) ]; then
+        export PATH=$PATH:$dir
+    fi
+done
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -59,7 +69,7 @@ ZSH_THEME='powerlevel9k/powerlevel9k'
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-HIST_STAMPS="dd/mm/yyyy"
+HIST_STAMPS="dd.mm.yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -78,7 +88,6 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 export EDITOR='vim'
@@ -140,10 +149,6 @@ alias free='free -m' # Show sizes in MBs
 # 2048 terminal game
 alias 2048='~/Games/2048.exe'
 
-# list all packages sorted by size:
-alias listAllBySize="pacman -Qi | awk '/^Name/{name=$3} /^Installed Size/{print $4$5, name}' | sort -h"
-alias list_all_by_size=listAllBySize
-
 # Screenshots
 screenshot()
 {
@@ -194,3 +199,28 @@ alias exit='kill -9 $(ps -p $PPID -o ppid=)'
 if ! [[ "$(ps -p $(ps -p $(echo $$) -o ppid=) -o comm=)" =~ 'bicon'* ]]; then
     bicon.bin
 fi
+
+
+# SSH PAGAYA VM'S
+vm() {
+    USER=${2:-"lidor"}
+
+    if [ "$#" -eq 0 ]; then
+        echo "Give at least one argument"
+    else
+        if [[ $1 == "gpu1" ]]; then
+            ssh -i ~/.ssh/.remote-research $USER@52.174.187.155
+        else
+            ssh -i ~/.ssh/.remote-research $USER@research-$1.westeurope.cloudapp.azure.com
+        fi
+    fi
+}
+
+alias list_vms="az vm list -g research-remote --query '[].name' --output tsv"
+alias list_active_vms="az vm list -g research-remote -d --query \"[?powerState == 'VM running'].name\" --output tsv"
+alias list_inactive_vms="az vm list -g research-remote -d --query \"[?powerState != 'VM running'].name\" --output tsv "
+alias list_unattached_disks="az disk list -g research-remote --query \"[?diskState == 'Unattached'].name\" --output tsv"
+
+# export PATH=$PATH:/home/lidor/bin
+
+# source '/home/lidor/lib/azure-cli/az.completion'

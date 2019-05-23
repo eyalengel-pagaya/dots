@@ -25,8 +25,8 @@
 "   Python   "
 """"""""""""""
     autocmd BufNewFile *.py,*.pyw 0r ~/.vim/skeletons/main.py
-    autocmd FileType python nnoremap <buffer> <leader>l :PymodeLintAuto<CR>
-    autocmd BufRead *.py,*.pyw :PymodeLint
+    " autocmd FileType python nnoremap <buffer> <leader>l :PymodeLintAuto<CR>
+    " autocmd BufRead *.py,*.pyw :PymodeLint
 
 
 """"""""""""""""
@@ -47,7 +47,7 @@
     autocmd FileType ts noremap <buffer> <F5> :wa <bar> :VimuxRunCommand("tsc " . expand('%'))<CR>
     " autocmd filetype js,jsx,ts,tsx,typescript let g:ale_fixers = ['prettier', 'eslint']
 
-    let g:colorizer_auto_filetype = 'ts,tsx,typescript,js,jsx,css,html'    " Colorize hex colors by default
+    " let g:colorizer_auto_filetype = 'ts,tsx,typescript,js,jsx,css,html'    " Colorize hex colors by default
     let g:previm_open_cmd = 'firefox-developer-edition'                    " Open markdown preview in Firefox
 
 " Snippets

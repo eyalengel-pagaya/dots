@@ -127,12 +127,13 @@ alias i3config='vim ~/.config/i3/config'
 
 alias xclip='xclip -selection clipboard'
 
-alias copy='tar cvfz - "$1" | (cd "$2"; tar xvfz -)'
+alias copy='tar cz "$1" | (cd "$2" && tar xz)'
 
 alias neofetch='neofetch --ascii ~/.config/neofetch/shrekscii --ascii_colors 2 5 6 1'
 
 # my common typos
 alias clera='clear'
+alias clea='clear'
 alias claer='clear'
 alias cler='clear'
 

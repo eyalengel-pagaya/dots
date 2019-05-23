@@ -13,7 +13,9 @@
     Plugin 'scrooloose/nerdtree'
     Plugin 'tpope/vim-surround'
     Plugin 'scrooloose/nerdcommenter'
-    Plugin 'neoclide/coc.nvim', {'do': './install.sh nightly'}
+    " Plugin 'neoclide/coc.nvim', {'do': './install.sh nightly'}
+    Plugin 'townk/vim-autoclose'
+
     " Plugin 'ctrlpvim/ctrlp.vim'
     " Plugin 'benmills/vimux'
     " Plugin 'terryma/vim-multiple-cursors'
@@ -35,7 +37,7 @@
     " Plugin 'Chiel92/vim-autoformat'
 
 " Python
-    Plugin 'python-mode/python-mode'
+    " Plugin 'python-mode/python-mode'
 
 " Web Plugins
     Plugin 'mattn/emmet-vim'

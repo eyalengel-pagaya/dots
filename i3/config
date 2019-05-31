@@ -12,7 +12,7 @@
 
 
 # CUZ FUCK FIREFOX CTRL+Q (ctrl+q closes firefox)
-	bindsym ctrl+q exec true
+	bindsym ctrl+q exec bash -c true
 
 # Font for window titles. Will also be used by the bar unless a different font is used in the bar settings.
 	font pango:DejaVu Sans 12
@@ -146,7 +146,7 @@
 	bindsym $mod+Shift+0 move container to workspace $ws10
 
 # On Startup
-    exec_always --no-startup-id feh --bg-fill "$WALLPAPERS/Atmosphere.jpg"                                          # Set background
+    exec_always --no-startup-id feh --bg-fill "$WALLPAPERS/amazing_mountain_milky_way_by_yakub_nihat-wallpaper-2560x1440.jpg"                                          # Set background
     exec_always --no-startup-id "setxkbmap -layout us,il && setxkbmap -option 'grp:alt_shift_toggle' & disown"      # Load keymaps
     exec_always --no-startup-id "compton & disown"                                                                  # Start compton
     exec_always --no-startup-id "$HOME/.config/polybar/launch.sh"                                                   # Start polybar launcher
@@ -227,6 +227,7 @@
 
 	bindsym $mod+o exec --no-startup-id '/usr/bin/firefox'
 	bindsym $mod+shift+o exec --no-startup-id "$I3_PATH/ducksearch"
+	bindsym $mod+t exec --no-startup-id "$I3_PATH/todo"
 	bindsym $mod+m exec --no-startup-id "$I3_PATH/dmenu_mount"
 	bindsym $mod+b exec --no-startup-id "$I3_PATH/xqcr"
 	bindsym $mod+Shift+Delete exec --no-startup-id lmc truemute; exec --no-startup-id lmc pause ; exec --no-startup-id pauseallmpv; workspace 0; exec $TERMINAL -e "$HOME/Games/2048.exe"; # Porno mode

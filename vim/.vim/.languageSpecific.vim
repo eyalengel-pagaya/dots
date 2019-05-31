@@ -29,6 +29,12 @@
     " autocmd BufRead *.py,*.pyw :PymodeLint
 
 
+""""""""""""""
+"    Bash    "
+""""""""""""""
+    autocmd BufNewFile *.sh :execute "0r ~/.vim/skeletons/main.sh"
+
+
 """"""""""""""""
 "   Web shit   "
 """"""""""""""""

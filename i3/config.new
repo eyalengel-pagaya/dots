@@ -1,0 +1,233 @@
+######################################################
+#       General settings, binds and commands:        #
+######################################################
+    set $mod Mod4
+    set $TERMINAL termite
+    set $EDITOR vim
+
+    set $HOME /home/lidor
+    set $PICTURES /home/lidor/Pictures
+    set $WALLPAPERS /home/lidor/Pictures/Wallpapers
+    set $I3_PATH /home/lidor/.config/i3
+
+
+# CUZ FUCK FIREFOX CTRL+Q (ctrl+q closes firefox)
+	bindsym ctrl+q exec true
+
+# Font for window titles. Will also be used by the bar unless a different font is used in the bar settings.
+	font pango:DejaVu Sans 12
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+	floating_modifier $mod
+
+# start a terminal
+	bindsym $mod+Return exec --no-startup-id $TERMINAL
+
+# reload the configuration file
+	bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+	bindsym $mod+Shift+r restart
+
+
+##############################
+#       Manage windows:      #
+##############################
+
+# kill focused window
+	bindsym $mod+Shift+q kill
+
+# change focus
+	bindsym $mod+h focus left
+	bindsym $mod+j focus down
+	bindsym $mod+k focus up
+	bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+	bindsym $mod+Left  focus left
+	bindsym $mod+Down  focus down
+	bindsym $mod+Up    focus up
+	bindsym $mod+Right focus right
+
+# move focused window
+	bindsym $mod+Shift+h move left
+	bindsym $mod+Shift+j move down
+	bindsym $mod+Shift+k move up
+	bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+	bindsym $mod+Shift+Left  move left
+	bindsym $mod+Shift+Down  move down
+	bindsym $mod+Shift+Up    move up
+	bindsym $mod+Shift+Right move right
+
+# window resize
+    bindsym $mod+Ctrl+Right resize shrink width 1 px or 1 ppt
+    bindsym $mod+Ctrl+Up resize grow height 1 px or 1 ppt
+    bindsym $mod+Ctrl+Down resize shrink height 1 px or 1 ppt
+    bindsym $mod+Ctrl+Left resize grow width 1 px or 1 ppt
+
+    bindsym $mod+Shift+Ctrl+Right resize shrink width 10 px or 10 ppt
+    bindsym $mod+Shift+Ctrl+Up resize grow height 10 px or 10 ppt
+    bindsym $mod+Shift+Ctrl+Down resize shrink height 10 px or 10 ppt
+    bindsym $mod+Shift+Ctrl+Left resize grow width 10 px or 10 ppt
+
+# split in horizontal orientation
+	bindsym $mod+g split h
+
+# split in vertical orientation
+	bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+	bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+	bindsym $mod+s layout stacking
+	bindsym $mod+w layout tabbed
+	bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+	bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+	bindsym $mod+space focus mode_toggle
+
+# gaps
+	for_window [class="^.*"] border pixel 0
+	smart_gaps on
+	gaps inner 10
+	gaps outer 10
+
+# focus the parent container
+	bindsym $mod+a focus parent
+
+# focus the child container
+    # bindsym $mod+d focus child
+
+
+#########################
+#       Workspaces:     #
+#########################
+
+# Define names for default workspaces for which we configure key bindings later on.
+	set $ws1  "1"
+	set $ws2  "2"
+	set $ws3  "3"
+	set $ws4  "4"
+	set $ws5  "5"
+	set $ws6  "6"
+	set $ws7  "7"
+	set $ws8  "8"
+	set $ws9  "9"
+	set $ws10 "10"
+
+# switch to workspace
+	bindsym $mod+1 workspace $ws1
+	bindsym $mod+2 workspace $ws2
+	bindsym $mod+3 workspace $ws3
+	bindsym $mod+4 workspace $ws4
+	bindsym $mod+5 workspace $ws5
+	bindsym $mod+6 workspace $ws6
+	bindsym $mod+7 workspace $ws7
+	bindsym $mod+8 workspace $ws8
+	bindsym $mod+9 workspace $ws9
+	bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+	bindsym $mod+Shift+1 move container to workspace $ws1
+	bindsym $mod+Shift+2 move container to workspace $ws2
+	bindsym $mod+Shift+3 move container to workspace $ws3
+	bindsym $mod+Shift+4 move container to workspace $ws4
+	bindsym $mod+Shift+5 move container to workspace $ws5
+	bindsym $mod+Shift+6 move container to workspace $ws6
+	bindsym $mod+Shift+7 move container to workspace $ws7
+	bindsym $mod+Shift+8 move container to workspace $ws8
+	bindsym $mod+Shift+9 move container to workspace $ws9
+	bindsym $mod+Shift+0 move container to workspace $ws10
+
+# On Startup
+    exec_always --no-startup-id feh --bg-fill "$WALLPAPERS/Atmosphere.jpg"                                          # Set background
+    exec_always --no-startup-id "setxkbmap -layout us,il && setxkbmap -option 'grp:alt_shift_toggle' & disown"      # Load keymaps
+    exec_always --no-startup-id "compton & disown"                                                                  # Start compton
+    exec_always --no-startup-id "$HOME/.config/polybar/launch.sh"                                                   # Start polybar launcher
+    exec_always --no-startup-id killall -q -9 bat_level.sh ; $I3_PATH/bat_level.sh                                  # Start the script that notifies about low battery
+    exec_always --no-startup-id xrandr --dpi 320                                                                    # Set dpi to 220
+	exec_always --no-startup-id nm-applet                                                                           # Start nm-applet by default
+    exec_always --no-startup-id /usr/lib/gnome-settings-daemon                                                      # To get the gnome daemon running
+
+
+######################################################
+#           Lock, Suspend and other modes:           #
+######################################################
+
+# Set locker for less typing
+    set $Locker gnome-screensaver-command
+    set $spotify-stop dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
+
+# Show message telling about all the possible modes
+    set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+
+# Handle all the different modes
+    mode "$mode_system" {
+        bindsym l exec --no-startup-id "$spotify-stop; $Locker --lock"                              # Lock
+        bindsym e exec --no-startup-id i3-msg exit                                                  # Exit from i3
+        bindsym s exec --no-startup-id "$spotify-stop; $Locker --lock; systemctl -i suspend"        # Suspend & lock
+        bindsym h exec --no-startup-id "$spotify-stop; $Locker --lock; systemctl -i hibernate"      # Hibername & lock
+        bindsym r exec --no-startup-id systemctl reboot                                             # Reboot
+        bindsym Shift+s exec --no-startup-id systemctl poweroff -i                                  # Shutdown
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+    }
+
+# Bind the menu to $mod+shift+x
+    bindsym $mod+shift+x mode "$mode_system"
+
+
+####################################################
+#       Default states for certain windows:        #
+####################################################
+
+# Spotify:
+    assign [class="Spotify"] $ws10
+    for_window [class="Spotify"] move to workspace $ws10
+
+# Discord:
+    assign [class="discord"] $ws10
+    for_window [class="discord"] move to workspace $ws10
+
+# Calculator:
+    for_window [title="Calculator"] floating enable
+
+# Slack, MailSpring:
+    assign [class="Slack"] $ws9
+    for_window [class="Slack"] move to workspace $ws9
+    assign [class="Mailspring"] $ws9
+    for_window [class="Mailspring"] move to workspace $ws9
+
+
+#################################
+#       Custom Keybinds:        "
+#################################
+
+    # bindsym $mod+shift+i exec --no-startup-id $TERMINAL -e "$EDITOR $I3_PATH/config"                      # Buggy
+    bindsym $mod+ctrl+r  exec --no-startup-id $TERMINAL -e ranger
+
+# screenshot
+    # maim -su | convert - \( +clone -background black -shadow 80x20+0+15 \) +swap -background transparent -layers merge +repage png:- | xclip -selection clipboard -t image/png
+	bindsym --release Print exec maim -su "$PICTURES/Screenshots/$(date '+%d.%m.%Y-%T').png"
+	bindsym --release shift+Print exec maim "$PICTURES/Screenshots/$(date '+%d.%m.%Y-%T').png" 
+	bindsym --release ctrl+Print exec maim -su | xclip -selection clipboard -t image/png
+	bindsym --release ctrl+shift+Print exec maim | xclip -selection clipboard -t image/png
+
+# Rofi 
+	bindsym --release Mod1+Tab exec rofi -combi-modi window -show window -theme solarized-darker -show-icons -font "System San Francisco Display 22" -no-fixed-num-lines -display-window ">>> "
+	bindsym --release $mod+d exec rofi -combi-modi drun -show drun -theme solarized-darker -lines 15 -show-icons -font "System San Francisco Display 22" -display-drun ">>> "
+
+	bindsym $mod+o exec --no-startup-id '/usr/bin/firefox'
+	bindsym $mod+shift+o exec --no-startup-id "$I3_PATH/ducksearch"
+	bindsym $mod+m exec --no-startup-id "$I3_PATH/dmenu_mount"
+	bindsym $mod+b exec --no-startup-id "$I3_PATH/xqcr"
+	bindsym $mod+Shift+Delete exec --no-startup-id lmc truemute; exec --no-startup-id lmc pause ; exec --no-startup-id pauseallmpv; workspace 0; exec $TERMINAL -e "$HOME/Games/2048.exe"; # Porno mode
+

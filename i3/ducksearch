@@ -7,7 +7,9 @@
 
 pgrep -x dmenu && exit
 
-choice=$(echo "🦆" | dmenu -i -p "Search DuckDuckGo:") || exit 1
+shopt -s nocasematch
+
+choice=$(dmenu -i -p "Search DuckDuckGo:") || exit 1
 
 if [ "$choice" = "🦆"  ]; then
     firefox "https://duckduckgo.com"
@@ -15,6 +17,8 @@ else
     # Detect if url
     if [[ "$choice" =~ ^(http:\/\/|https:\/\/)?[a-zA-Z0-9]+\.[a-zA-Z]+(/)?.*$ ]]; then
         firefox "$choice"
+    elif [[ $choice == "portal" ]]; then
+        firefox "https://portal.azure.com/"
     else
         firefox "https://duckduckgo.com/?q=$choice&t=ffab&atb=v1-1"
     fi

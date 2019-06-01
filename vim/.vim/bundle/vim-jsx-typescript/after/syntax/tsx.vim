@@ -25,51 +25,77 @@ if exists('s:current_syntax')
   let b:current_syntax = s:current_syntax
 endif
 
-"  <tag></tag>
-" s~~~~~~~~~~~e
-syntax region tsxRegion
-      \ start=+\(<>\|\%(<\|\w\)\@<!<\z([/a-zA-Z][a-zA-Z0-9:\-.]*\)\)+
-      \ skip=+<!--\_.\{-}-->+
-      \ end=+</\z1\_\s\{-}[^(=>)]>+
-      \ end=+>\n*\s*[),]\@=+
-      \ end=+>[;]*\n*\s*\(}\n*\s*\)\@=+
-      \ fold
-      \ contains=tsxTag,tsxCloseTag,tsxComment,Comment,@Spell,jsBlock,tsxColon
-      \ keepend
-      \ extend
-
+"""""" Vim Syntax Help """"""
+" `keepend` and `extend` docs:
+" https://github.com/othree/til/blob/master/vim/syntax-keepend-extend.md
 
 " \@<=    positive lookbehind
 " \@<!    negative lookbehind
 " \@=     positive lookahead
 " \@!     negative lookahead
 
-" these lines are for ending 'tsxRegion' for nested 'jsBlock'
-      " \ end=+>\n*\s*[),]\@=+
-      " \ end=+>[;]*\n*\s*\(}\n*\s*\)\@=+
+"  <tag></tag>
+" s~~~~~~~~~~~e
+syntax region tsxRegion
+    \ start=+\(\([a-zA-Z]\)\@<!<>\|\(<\|\w\)\@<!<\z([/a-zA-Z][a-zA-Z0-9:\-.]*\)\)+
+    \ skip=+<!--\_.\{-}-->+
+    \ end=+</\_.\{-}>+
+    \ end=+[a-zA-Z0-9.]*[/]*>\s*\n*\s*\n*\s*[});,]\@=+
+    \ contains=tsxTag,tsxCloseTag,tsxComment,Comment,@Spell,tsxColon,tsxIfOperator,tsxElseOperator,jsBlock
+    \ extend
+    \ keepend
 
+" end 1): handle </NormalClosingTag>
+" end 2): handle <SelfClosingTags/>\s*\n*\s*\n*\s*)
+" \s => spaces/tabs
+" \n => end-of-line => \n only match end of line in the buffer.
+" \s*\n*\s*\n*\s* => handles arbitrary spacing between closing tsxTag </tag>
+" and the ending brace for the scope: `}` or `)`
 
-syn region jsBlock contained start=+{+ end=+}+
-  \ contains=TOP
-  \ extend
+" <tag>{content}</tag>
+"      s~~~~~~~e
+syn region jsBlock
+    \ start=+{+
+    \ end=+}+
+    \ contained
+    \ contains=TOP
 
+" \@<=    positive lookbehind
+" \@<!    negative lookbehind
+" \@=     positive lookahead
+" \@!     negative lookahead
+" RULE: capture expression, then apply rule AFTER
+" e.g foo\(bar\)\@!
+" match all `foo` which is not followed by `bar`
+" https://jbodah.github.io/blog/2016/11/01/positivenegative-lookaheadlookbehind-vim/
 
-" matches tsx Comments: {/* .....  /*}
-syn region Comment contained start=+{/\*+ end=+\*/}+ contains=Comment
-  \ extend
-
-syn region tsxAttributeComment contained start=+//+ end=+\n+ contains=Comment
-  \ extend
+" <tag key={this.props.key}>
+"          s~~~~~~~~~~~~~~e
+syntax region tsxJsBlock
+    \ matchgroup=tsxAttributeBraces start=+\([=]\|\s\)\@<={+
+    \ matchgroup=tsxAttributeBraces end=+}\(\s*}\|)\)\@!+
+    \ contained
+    \ keepend
+    \ extend
+    \ contains=TOP
 
 " <tag id="sample">
 " s~~~~~~~~~~~~~~~e
-      " \ start=+<[^ }/!?<>"'=:]\@=+
 syntax region tsxTag
-      \ matchgroup=tsxCloseTag
-      \ start=+<[^ }/!?<"'=:]\@=+
-      \ end=+\/\?>+
+      \ start=+<[^ /!?<"'=:]\@=+
+      \ end=+[/]\{0,1}>+
       \ contained
-      \ contains=tsxTagName,tsxAttrib,tsxEqual,tsxString,tsxEscapeJs,tsxAttributeComment
+      \ contains=tsxTagName,tsxAttrib,tsxEqual,tsxString,tsxJsBlock,tsxAttributeComment,jsBlock,tsxGenerics
+
+syntax region tsxGenerics
+    \ matchgroup=tsxTypeBraces start=+\([<][_\.a-zA-Z0-9]*\|[<][_\.a-zA-Z0-9]*\)\@<=\s*[<]+
+    \ matchgroup=tsxTypeBraces end=+>+
+    \ contains=tsxTypes,tsxGenerics
+    \ contained
+    \ extend
+
+syntax match tsxTypes /[_\.a-zA-Z0-9]/
+    \ contained
 
 " </tag>
 " ~~~~~~
@@ -78,6 +104,13 @@ syntax region tsxCloseTag
       \ end=+>+
       \ contained
       \ contains=tsxCloseString
+
+" matches tsx Comments: {/* .....  /*}
+syn region Comment contained start=+{/\*+ end=+\*/}+ contains=Comment
+  \ extend
+
+syn region tsxAttributeComment contained start=+//+ end=+\n+ contains=Comment
+  \ extend
 
 syntax match tsxCloseString
     \ +\w\++
@@ -90,7 +123,6 @@ syntax match tsxColon
 " <!-- -->
 " ~~~~~~~~
 syntax match tsxComment /<!--\_.\{-}-->/ display
-
 syntax match tsxEntity "&[^; \t]*;" contains=tsxEntityPunct
 syntax match tsxEntityPunct contained "[&.;]"
 
@@ -104,8 +136,9 @@ syntax match tsxTagName
 " <tag key={this.props.key}>
 "      ~~~
 syntax match tsxAttrib
-    \ +[-'"<]\@<!\<[a-zA-Z:_][-.0-9a-zA-Z0-9:_]*\>\(['">]\@!\|$\)+
+    \ +[-'"<]\@<!\<[a-zA-Z:_][-.0-9a-zA-Z0-9:_]*[/]\{0,1}\>\(['"]\@!\|$\)+
     \ contained
+    \ keepend
     \ contains=tsxAttribPunct,tsxAttribHook
     \ display
 
@@ -126,41 +159,31 @@ syntax region tsxString contained start=+`+ end=+`+ contains=tsxEntity,@Spell di
 "         s~~~~~~e
 syntax region tsxString contained start=+'+ end=+'+ contains=tsxEntity,@Spell display
 
-" <tag key={this.props.key}>
-"          s~~~~~~~~~~~~~~e
-syntax region tsxEscapeJs matchgroup=tsxAttributeBraces
-    \ start=+\w\{0,1}[=]\@<={+
-    \ end=+}\@>\ze\%(\/\|\n\|\s\|>\)+
-    \ contained
-    \ contains=TOP
-
-
 syntax match tsxIfOperator +?+
+syntax match tsxNotOperator +!+
 syntax match tsxElseOperator +:+
-
-syntax cluster jsExpression add=tsxRegion
 
 " highlight def link tsxTagName htmlTagName
 highlight def link tsxTagName xmlTagName
-" highlight def link tsxCloseTag htmlTag
+highlight def link tsxTag htmlTag
 highlight def link tsxCloseTag xmlEndTag
 highlight def link tsxRegionEnd xmlEndTag
-
 highlight def link tsxEqual htmlTag
 highlight def link tsxString String
 highlight def link tsxNameSpace Function
 highlight def link tsxComment Error
 highlight def link tsxAttrib htmlArg
-highlight def link tsxEscapeJs tsxEscapeJs
-
 highlight def link tsxCloseString htmlTagName
 highlight def link tsxAttributeBraces htmlTag
 highlight def link tsxAttributeComment Comment
-
 highlight def link tsxColon typescriptEndColons
 
-
-
+highlight def link tsxGenerics typescriptEndColons
+highlight def link tsxIfOperator typescriptEndColons
+highlight def link tsxNotOperator typescriptEndColons
+highlight def link tsxElseOperator typescriptEndColons
+highlight def link tsxTypeBraces htmlTag
+highlight def link tsxTypes typescriptEndColons
 
 " Custom React Highlights
 syn keyword ReactState state nextState prevState setState

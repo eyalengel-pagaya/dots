@@ -195,3 +195,11 @@ alias exit='kill -9 $(ps -p $PPID -o ppid=)'
 if ! [[ "$(ps -p $(ps -p $(echo $$) -o ppid=) -o comm=)" =~ 'bicon'* ]]; then
     bicon.bin
 fi
+
+sprunge() {
+  if [[ $1 ]]; then
+    curl -F 'sprunge=<-' "http://sprunge.us" <"$1"
+  else
+    curl -F 'sprunge=<-' "http://sprunge.us"
+  fi
+}

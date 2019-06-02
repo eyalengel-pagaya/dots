@@ -1,6 +1,7 @@
 """"""""""""
 "   C/C++  "
 """"""""""""
+    autocmd BufNewFile CMakeLists.txt :execute "0r ~/.vim/skeletons/CMakeLists.txt"
     autocmd FileType c,cpp nnoremap <buffer> <C-space> /<++><Enter>"_d4l:noh<return>i
     autocmd FileType c,cpp inoremap <buffer> <C-space> <esc><esc>/<++><Enter>"_d4l:noh<return>i
 
@@ -13,9 +14,11 @@
     autocmd FileType c,cpp let g:ale_completion_enabled = 1
 
 " C-Only snippets
+    autocmd BufNewFile *.c :execute "0r ~/.vim/skeletons/main.c"
     autocmd FileType c iabbrev c printf(<++>);<esc>0<C-space>
 
 " Cpp-Only snippets
+    autocmd BufNewFile *.cpp :execute "0r ~/.vim/skeletons/main.cpp"
     autocmd FileType cpp iabbrev c cout <<<++> << endl;<esc>0<C-space>
     autocmd FileType h,hpp,cpp iabbrev u using<++>::<++>;<esc>0<C-space>
     autocmd FileType h,hpp,cpp iabbrev us using std::<++>;<esc>0<C-space>

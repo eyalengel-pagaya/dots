@@ -40,11 +40,11 @@
     " Plugin 'python-mode/python-mode'
 
 " Web Plugins
-    Plugin 'mattn/emmet-vim'
-    Plugin 'mxw/vim-jsx'
-    Plugin 'ianks/vim-tsx'
-    Plugin 'leafgarland/typescript-vim'
-    Plugin 'peitalin/vim-jsx-typescript'
+    " Plugin 'mattn/emmet-vim'
+    " Plugin 'mxw/vim-jsx'
+    " Plugin 'ianks/vim-tsx'
+    " Plugin 'leafgarland/typescript-vim'
+    " Plugin 'peitalin/vim-jsx-typescript'
     Plugin 'ap/vim-css-color'
 
     call vundle#end()            " required
@@ -66,7 +66,7 @@
     let g:ycm_global_ycm_extra_conf = '/home/lidor/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
     let g:ycm_show_diagnoistcs_ui = 1
     " let g:ycm_server_keep_logfiles = 1
-    let g:ycm_server_log_level = 'debug'
+    " let g:ycm_server_log_level = 'debug'
     map <C-l> :YcmCompleter FixIt<CR>
 
 

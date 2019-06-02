@@ -201,7 +201,6 @@ if ! [[ "$(ps -p $(ps -p $(echo $$) -o ppid=) -o comm=)" =~ 'bicon'* ]]; then
     bicon.bin
 fi
 
-
 # SSH PAGAYA VM'S
 vm() {
     USER=${2:-"lidor"}
@@ -225,3 +224,11 @@ alias list_unattached_disks="az disk list -g research-remote --query \"[?diskSta
 # export PATH=$PATH:/home/lidor/bin
 
 # source '/home/lidor/lib/azure-cli/az.completion'
+
+sprunge() {
+  if [[ $1 ]]; then
+    curl -F 'sprunge=<-' "http://sprunge.us" <"$1"
+  else
+    curl -F 'sprunge=<-' "http://sprunge.us"
+  fi
+}

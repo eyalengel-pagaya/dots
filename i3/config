@@ -2,8 +2,10 @@
 #       General settings, binds and commands:        #
 ######################################################
     set $mod Mod4
-    set $TERMINAL termite
+
+    set $TERMINAL miniterm
     set $EDITOR vim
+    set $BROWSER firefox
 
     set $HOME /home/lidor
     set $PICTURES /home/lidor/Pictures
@@ -55,11 +57,15 @@
 	bindsym $mod+Shift+k move up
 	bindsym $mod+Shift+l move right
 
-# alternatively, you can use the cursor keys:
 	bindsym $mod+Shift+Left  move left
 	bindsym $mod+Shift+Down  move down
 	bindsym $mod+Shift+Up    move up
 	bindsym $mod+Shift+Right move right
+
+    bindsym $mod+Shift+less move container to output left
+    bindsym $mod+Shift+greater move container to output right
+    bindsym $mod+ctrl+less move workspace to output left
+    bindsym $mod+ctrl+greater move workspace to output right
 
 # window resize
     bindsym $mod+Ctrl+Right resize shrink width 1 px or 1 ppt
@@ -146,7 +152,7 @@
 	bindsym $mod+Shift+0 move container to workspace $ws10
 
 # On Startup
-    exec_always --no-startup-id feh --bg-fill "$WALLPAPERS/amazing_mountain_milky_way_by_yakub_nihat-wallpaper-2560x1440.jpg"                                          # Set background
+    exec_always --no-startup-id feh --bg-fill "$WALLPAPERS/spring_tranquility-wallpaper-3840x2160.jpg"
     exec_always --no-startup-id "setxkbmap -layout us,il && setxkbmap -option 'grp:alt_shift_toggle' & disown"      # Load keymaps
     exec_always --no-startup-id "compton & disown"                                                                  # Start compton
     exec_always --no-startup-id "$HOME/.config/polybar/launch.sh"                                                   # Start polybar launcher
@@ -154,6 +160,9 @@
     exec_always --no-startup-id xrandr --dpi 320                                                                    # Set dpi to 220
 	exec_always --no-startup-id nm-applet                                                                           # Start nm-applet by default
     exec_always --no-startup-id /usr/lib/gnome-settings-daemon                                                      # To get the gnome daemon running
+    exec_always --no-startup-id bash -c "pgrep -x spotify    || spotify"                                            # Start Spotify
+    exec_always --no-startup-id bash -c "pgrep -x slack      || slack"                                              # Start Slack
+    exec_always --no-startup-id bash -c "pgrep -x mailspring || mailspring"                                         # Start MailSpring
 
 
 ######################################################
@@ -161,18 +170,19 @@
 ######################################################
 
 # Set locker for less typing
-    set $Locker gnome-screensaver-command
-    set $spotify-stop dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
+    set $LOCK_SCREEN_WALLPAPER='~/Pictures/Wallpapers/black_guitar_2-wallpaper-1920x1080.jpg'
+    set $Locker $I3_PATH/lock_screen.sh $LOCK_SCREEN_WALLPAPER
+    set $spotify-stop playerctl pause
 
 # Show message telling about all the possible modes
     set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 
 # Handle all the different modes
     mode "$mode_system" {
-        bindsym l exec --no-startup-id "$spotify-stop; $Locker --lock"                              # Lock
+        bindsym l exec --no-startup-id "$spotify-stop; $Locker"                                     # Lock
         bindsym e exec --no-startup-id i3-msg exit                                                  # Exit from i3
-        bindsym s exec --no-startup-id "$spotify-stop; $Locker --lock; systemctl -i suspend"        # Suspend & lock
-        bindsym h exec --no-startup-id "$spotify-stop; $Locker --lock; systemctl -i hibernate"      # Hibername & lock
+        bindsym s exec --no-startup-id "$spotify-stop; $Locker";                                    # Suspend & lock
+        bindsym h exec --no-startup-id "$spotify-stop; $Locker"                                     # Hibername & lock
         bindsym r exec --no-startup-id systemctl reboot                                             # Reboot
         bindsym Shift+s exec --no-startup-id systemctl poweroff -i                                  # Shutdown
 
@@ -211,9 +221,6 @@
 #       Custom Keybinds:        "
 #################################
 
-    # bindsym $mod+shift+i exec --no-startup-id $TERMINAL -e "$EDITOR $I3_PATH/config"                      # Buggy
-    bindsym $mod+ctrl+r  exec --no-startup-id $TERMINAL -e ranger
-
 # screenshot
     # maim -su | convert - \( +clone -background black -shadow 80x20+0+15 \) +swap -background transparent -layers merge +repage png:- | xclip -selection clipboard -t image/png
 	bindsym --release Print exec maim -su "$PICTURES/Screenshots/$(date '+%d.%m.%Y-%T').png"
@@ -225,18 +232,46 @@
 	bindsym --release Mod1+Tab exec rofi -combi-modi window -show window -theme solarized-darker -show-icons -font "System San Francisco Display 22" -no-fixed-num-lines -display-window ">>> "
 	bindsym --release $mod+d exec rofi -combi-modi drun -show drun -theme solarized-darker -lines 15 -show-icons -font "System San Francisco Display 22" -display-drun ">>> "
 
-	bindsym $mod+o exec --no-startup-id '/usr/bin/firefox'
+	bindsym $mod+o exec --no-startup-id "$BROWSER -new-window"
 	bindsym $mod+shift+o exec --no-startup-id "$I3_PATH/ducksearch"
-	bindsym $mod+t exec --no-startup-id "$I3_PATH/todo"
-	bindsym $mod+m exec --no-startup-id "$I3_PATH/dmenu_mount"
+	bindsym $mod+shift+t exec --no-startup-id "$I3_PATH/todo"
+	bindsym $mod+ctrl+m exec --no-startup-id "$I3_PATH/dmenu_mount"
 	bindsym $mod+b exec --no-startup-id "$I3_PATH/xqcr"
-	bindsym $mod+Shift+Delete exec --no-startup-id lmc truemute; exec --no-startup-id lmc pause ; exec --no-startup-id pauseallmpv; workspace 0; exec $TERMINAL -e "$HOME/Games/2048.exe"; # Porno mode
+	bindsym $mod+Shift+Delete exec --no-startup-id lmc truemute; exec --no-startup-id lmc pause ; exec --no-startup-id pauseallmpv; workspace 0; exec $TERMINAL -e ""; # Porno mode
 
 # multimedia keys enable
     bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume `pacmd list-sinks | awk '/* index:/{print $3}'` +3%
     bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume `pacmd list-sinks | awk '/* index:/{print $3}'` -3%
     bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute `pacmd list-sinks | awk '/* index:/{print $3}'` toggle
 
+# Spotify media keys
+    bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+    bindsym XF86AudioNext exec --no-startup-id playerctl next
+    bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+
 # Sreen brightness controls
     bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
     bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10  # decrease screen brightness
+
+# Monitors
+    bindsym $mod+Ctrl+1 exec xrandr --output eDP1 --primary --mode 3840x2160 --pos 0x0 --rotate normal --output DP1 --off --output DP1-1 --off --output DP1-2 --off --output DP1-3 --off --output DP2 --off --output DP3 --off --output VIRTUAL1 --off
+    bindsym $mod+Ctrl+2 exec xrandr --output eDP1 --primary --mode 3840x2160 --pos 0x0 --rotate normal --output DP1 --off --output DP1-1 --off --output DP1-2 --mode 3840x2160 --pos 3840x0 --rotate normal --output DP1-3 --off --output DP2 --off --output DP3 --off --output VIRTUAL1 --off
+
+# Dropdowns
+    # for_window [instance="dropdown_*"] floating enable
+    # for_window [instance="dropdown_*"] move scratchpad; [instance="dropdown_*"] scratchpad show; move scratchpad
+    # bindsym $mod+ctrl+z exec --no-startup-id miniterm --name dropdown_miniterm
+    for_window [title="^dropdown.*$"] floating enable
+    for_window [title="^dropdown.*$"] move scratchpad
+    for_window [title="^dropdown.*$"] sticky enable
+    for_window [title="^dropdown.*$"] border pixel 5
+
+    for_window [title="^dropdown.*$"] width 1444
+    for_window [title="^dropdown.*$"] height 868
+
+    exec --no-startup-id $TERMINAL -t dropdown
+    exec --no-startup-id $TERMINAL -t dropdown_ranger -e ranger
+
+    set $get_window bash -c 'wmctrl -l | awk "/$1/{print \$4}" || miniterm -t $1 $@' 
+    bindsym $mod+t [title="^dropdown$"] scratchpad show; [title="^dropdown$"] move position center
+    bindsym $mod+ctrl+r [title="^dropdown_ranger$"] scratchpad show; [title="^dropdown_ranger$"] move position center

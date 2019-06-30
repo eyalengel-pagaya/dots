@@ -59,7 +59,7 @@ font-5 = "Font Awesome 5 Brands:style=Regular"
 
 tray-position = right
 tray-padding = 2
-tray-transparent = true
+/* tray-transparent = true */
 ;tray-background = #0063ff
   
 ;wm-restack = bspwm

@@ -13,8 +13,10 @@
     Plugin 'scrooloose/nerdtree'
     Plugin 'tpope/vim-surround'
     Plugin 'scrooloose/nerdcommenter'
-    " Plugin 'neoclide/coc.nvim', {'do': './install.sh nightly'}
     Plugin 'townk/vim-autoclose'
+    Plugin 'godlygeek/tabular'
+    Plugin 'plasticboy/vim-markdown'
+    " Plugin 'neoclide/coc.nvim', {'do': './install.sh nightly'}
 
     " Plugin 'ctrlpvim/ctrlp.vim'
     " Plugin 'benmills/vimux'
@@ -35,17 +37,19 @@
     Plugin 'PotatoesMaster/i3-vim-syntax'
     " Plugin 'sbdchd/neoformat'
     " Plugin 'Chiel92/vim-autoformat'
+    Plugin 'freitass/todo.txt-vim.git'
 
 " Python
     " Plugin 'python-mode/python-mode'
 
 " Web Plugins
-    " Plugin 'mattn/emmet-vim'
+    Plugin 'mattn/emmet-vim'
     " Plugin 'mxw/vim-jsx'
     " Plugin 'ianks/vim-tsx'
     " Plugin 'leafgarland/typescript-vim'
     " Plugin 'peitalin/vim-jsx-typescript'
-    Plugin 'ap/vim-css-color'
+    " Plugin 'ap/vim-css-color'
+    Plugin 'chrisbra/Colorizer'
 
     call vundle#end()            " required
     filetype plugin indent on    " required
@@ -60,7 +64,6 @@
     set background=dark
     hi Normal guibg=NONE ctermbg=NONE       " Make backgound transparent
     let g:solarized_contrast = 'high'
-
 
 " YouCompleteMe
     let g:ycm_global_ycm_extra_conf = '/home/lidor/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
@@ -97,12 +100,14 @@
 
 
 " vim-multiple-cursors
-    let g:multi_cursor_start_word_key      = '<C-n>'
-    let g:multi_cursor_select_all_word_key = '<A-n>'
-    let g:multi_cursor_start_key           = 'g<C-n>'
-    let g:multi_cursor_select_all_key      = 'g<A-n>'
-    let g:multi_cursor_next_key            = '<C-n>'
-    let g:multi_cursor_prev_key            = '<C-p>'
-    let g:multi_cursor_skip_key            = '<C-x>'
-    let g:multi_cursor_quit_key            = '<Esc>'
+    " let g:multi_cursor_start_word_key      = '<C-n>'
+    " let g:multi_cursor_select_all_word_key = '<A-n>'
+    " let g:multi_cursor_start_key           = 'g<C-n>'
+    " let g:multi_cursor_select_all_key      = 'g<A-n>'
+    " let g:multi_cursor_next_key            = '<C-n>'
+    " let g:multi_cursor_prev_key            = '<C-p>'
+    " let g:multi_cursor_skip_key            = '<C-x>'
+    " let g:multi_cursor_quit_key            = '<Esc>'
 
+" Tabularize (aka auto text-aligner)
+   nnoremap <leader>t :Tabularize /

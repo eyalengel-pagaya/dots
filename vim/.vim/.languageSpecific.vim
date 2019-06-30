@@ -15,10 +15,12 @@
 
 " C-Only snippets
     autocmd BufNewFile *.c :execute "0r ~/.vim/skeletons/main.c"
+    autocmd BufNewFile *.sh :$
     autocmd FileType c iabbrev c printf(<++>);<esc>0<C-space>
 
 " Cpp-Only snippets
     autocmd BufNewFile *.cpp :execute "0r ~/.vim/skeletons/main.cpp"
+    autocmd BufNewFile *.sh :$
     autocmd FileType cpp iabbrev c cout <<<++> << endl;<esc>0<C-space>
     autocmd FileType h,hpp,cpp iabbrev u using<++>::<++>;<esc>0<C-space>
     autocmd FileType h,hpp,cpp iabbrev us using std::<++>;<esc>0<C-space>
@@ -28,6 +30,7 @@
 "   Python   "
 """"""""""""""
     autocmd BufNewFile *.py,*.pyw 0r ~/.vim/skeletons/main.py
+    autocmd BufNewFile *.sh :$
     " autocmd FileType python nnoremap <buffer> <leader>l :PymodeLintAuto<CR>
     " autocmd BufRead *.py,*.pyw :PymodeLint
 
@@ -36,6 +39,7 @@
 "    Bash    "
 """"""""""""""
     autocmd BufNewFile *.sh :execute "0r ~/.vim/skeletons/main.sh"
+    autocmd BufNewFile *.sh :$
 
 
 """"""""""""""""

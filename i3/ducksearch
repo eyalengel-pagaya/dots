@@ -8,18 +8,40 @@
 pgrep -x dmenu && exit
 
 shopt -s nocasematch
+FIREFOX="firefox -new-window"
 
 choice=$(dmenu -i -p "Search DuckDuckGo:") || exit 1
 
 if [ "$choice" = "🦆"  ]; then
-    firefox "https://duckduckgo.com"
+    $FIREFOX "https://duckduckgo.com"
 else
     # Detect if url
     if [[ "$choice" =~ ^(http:\/\/|https:\/\/)?[a-zA-Z0-9]+\.[a-zA-Z]+(/)?.*$ ]]; then
-        firefox "$choice"
-    elif [[ $choice == "portal" ]]; then
-        firefox "https://portal.azure.com/"
+        $FIREFOX "$choice"
     else
-        firefox "https://duckduckgo.com/?q=$choice&t=ffab&atb=v1-1"
+        case $choice in 
+            # Azure portal:
+            "portal") $FIREFOX "https://portal.azure.com/" ;;
+
+            # Amazon console:
+            "console" | "aws") $FIREFOX "https://aws.amazon.com/console/" ;;
+
+            # GitHub:
+            "gp") $FIREFOX "https://github.com/pagaya" ;;
+            "gpr") $FIREFOX "https://github.com/pagaya/research" ;;
+            "gpdd") $FIREFOX "https://github.com/pagaya/data_deployment" ;;
+
+            # Pagaya teamcity:
+            "teamcity" | "tc") $FIREFOX "https://teamcity.pagaya-services.com";;
+
+            # Virtual Machines stylesheet:
+            "vm sheet") $FIREFOX "https://docs.google.com/spreadsheets/d/1zYHes6GYUmKzjszVEIV1CQNybjSHttrcTCSDvDZFsrI/edit#gid=0" ;;
+
+            # TU Mail stylesheet:
+            "tu" | "tu mail") $FIREFOX "https://docs.google.com/spreadsheets/d/1B6QehEacEwvcJrW6WzN8-Pm6U_eTOTwSuhgPRnvgISE/edit#gid=0" ;;
+
+            # Fallback, aka DDG-search it:
+            *) $FIREFOX "https://duckduckgo.com/?q=$choice&t=ffab&atb=v1-1" ;;
+        esac
     fi
 fi

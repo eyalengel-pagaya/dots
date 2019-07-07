@@ -9,15 +9,15 @@
     Plugin 'VundleVim/Vundle.vim'
 
 " IDE plugins
-    Plugin 'Valloric/YouCompleteMe'
+    " Plugin 'Valloric/YouCompleteMe'
     Plugin 'scrooloose/nerdtree'
     Plugin 'tpope/vim-surround'
     Plugin 'scrooloose/nerdcommenter'
     Plugin 'townk/vim-autoclose'
     Plugin 'godlygeek/tabular'
-    Plugin 'plasticboy/vim-markdown'
-    " Plugin 'neoclide/coc.nvim', {'do': './install.sh nightly'}
 
+    " Plugin 'plasticboy/vim-markdown'
+    " Plugin 'neoclide/coc.nvim', {'do': './install.sh nightly'}
     " Plugin 'ctrlpvim/ctrlp.vim'
     " Plugin 'benmills/vimux'
     " Plugin 'terryma/vim-multiple-cursors'
@@ -37,19 +37,19 @@
     Plugin 'PotatoesMaster/i3-vim-syntax'
     " Plugin 'sbdchd/neoformat'
     " Plugin 'Chiel92/vim-autoformat'
-    Plugin 'freitass/todo.txt-vim.git'
+    " Plugin 'freitass/todo.txt-vim.git'
 
 " Python
     " Plugin 'python-mode/python-mode'
 
 " Web Plugins
     Plugin 'mattn/emmet-vim'
+    Plugin 'chrisbra/Colorizer'
     " Plugin 'mxw/vim-jsx'
     " Plugin 'ianks/vim-tsx'
     " Plugin 'leafgarland/typescript-vim'
     " Plugin 'peitalin/vim-jsx-typescript'
     " Plugin 'ap/vim-css-color'
-    Plugin 'chrisbra/Colorizer'
 
     call vundle#end()            " required
     filetype plugin indent on    " required

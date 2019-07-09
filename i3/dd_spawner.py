@@ -8,7 +8,7 @@ from time import sleep
 def main():
     dropdowns = {'dropdown_terminal': '',
                  'dropdown_ranger': 'ranger',
-                 'dropdown_python': 'ipython',
+                 'dropdown_python': '/usr/bin/python3.6 /usr/bin/ipython',
             }
 
     while True:
@@ -16,7 +16,7 @@ def main():
         output = [i for i in output.stdout.decode().split('\n') if i]
         for i in list(set(dropdowns.keys()) - set(output)):
             if dropdowns[i]:
-                system(f"miniterm -t {i} -e {dropdowns[i]}")
+                system(f"miniterm -t {i} -e '{dropdowns[i]}'")
             else:
                 system(f"miniterm -t {i}")
 

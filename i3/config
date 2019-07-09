@@ -163,30 +163,47 @@
     exec_always --no-startup-id bash -c "pgrep -x spotify       || spotify"                                         # Start Spotify
     exec_always --no-startup-id bash -c "pgrep -x slack         || slack"                                           # Start Slack
     exec_always --no-startup-id bash -c "pgrep -x mailspring    || mailspring"                                      # Start MailSpring
-    exec_always                 bash -c "pgrep -x dd_spawner.py || '/home/lidor/.config/i3/dd_spawner.py'"          # Start dd_spawner.py
+    exec_always --no-startup-id bash -c "pgrep -x dd_spawner.py || '/home/lidor/.config/i3/dd_spawner.py'"          # Start dd_spawner.py
     exec_always --no-startup-id bash -c "wmctrl -l | grep 'Jira - Mozilla Firefox' || firefox -new-window https://pagaya.atlassian.net/secure/RapidBoard.jspa?projectKey=DATA"          # Start Jira
+    exec_always --no-startup-id "$HOME/daemons/monitors.sh"
 
 
 ######################################################
 #           Lock, Suspend and other modes:           #
 ######################################################
 
+# -set $Locker python /home/lidor/.config/i3/i3lock_config.py /home/lidor/Pictures/Wallpapers/lock.png
+# -set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+# -mode "$mode_system" {
+# -    bindsym l exec --no-startup-id $Locker, mode "default"
+# -    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+# -    bindsym s exec --no-startup-id $Locker 'systemctl suspend', mode "default"
+# -    bindsym h exec --no-startup-id $Locker && 'systemctl hibernate', mode "default"
+# -    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+# -    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+
+# -    # back to normal: Enter or Escape
+# -    bindsym Return mode "default"
+# -    bindsym Escape mode "default"
+# -}
+ 
+# -bindsym $mod+shift+x mode "$mode_system"
+
 # Set locker for less typing
-    set $LOCK_SCREEN_WALLPAPER='~/Pictures/Wallpapers/black_guitar_2-wallpaper-1920x1080.jpg'
-    set $Locker $I3_PATH/lock_screen.sh $LOCK_SCREEN_WALLPAPER
-    set $spotify-stop playerctl pause
+    set $Locker ~/.config/i3/lock_screen.sh ~/Pictures/Wallpapers/milky_way_12-wallpaper-1920x1080.jpg
+    set $spotify_stop playerctl pause
 
 # Show message telling about all the possible modes
     set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 
 # Handle all the different modes
     mode "$mode_system" {
-        bindsym l exec --no-startup-id "$spotify-stop; $Locker"                                     # Lock
-        bindsym e exec --no-startup-id i3-msg exit                                                  # Exit from i3
-        bindsym s exec --no-startup-id "$spotify-stop; $Locker";                                    # Suspend & lock
-        bindsym h exec --no-startup-id "$spotify-stop; $Locker"                                     # Hibername & lock
-        bindsym r exec --no-startup-id systemctl reboot                                             # Reboot
-        bindsym Shift+s exec --no-startup-id systemctl poweroff -i                                  # Shutdown
+        bindsym       l exec --no-startup-id "$spotify_stop; $Locker", mode "default"                                         # Lock
+        bindsym       h exec --no-startup-id "$spotify_stop; systemctl suspend; $Locker", mode "default"                      # Hibername & lock
+        bindsym       s exec --no-startup-id "$spotify_stop; systemctl suspend; $Locker", mode "default"                      # Suspend & lock
+        bindsym       r exec --no-startup-id systemctl reboot                                                                 # Reboot
+        bindsym       e exec --no-startup-id i3-msg exit                                                                      # Exit from i3
+        bindsym Shift+s exec --no-startup-id systemctl poweroff -i                                                            # Shutdown
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"

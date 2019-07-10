@@ -11,6 +11,7 @@
     set $PICTURES /home/lidor/Pictures
     set $WALLPAPERS /home/lidor/Pictures/Wallpapers
     set $I3_PATH /home/lidor/.config/i3
+    set $DAEMONS /home/lidor/daemons
 
 
 # CUZ FUCK FIREFOX CTRL+Q (ctrl+q closes firefox)
@@ -156,38 +157,22 @@
     exec_always --no-startup-id "setxkbmap -layout us,il && setxkbmap -option 'grp:alt_shift_toggle' & disown"      # Load keymaps
     exec_always --no-startup-id "compton & disown"                                                                  # Start compton
     exec_always --no-startup-id "$HOME/.config/polybar/launch_polybar.sh"                                           # Start polybar launcher
-    exec_always --no-startup-id killall -q -9 bat_level.sh ; $I3_PATH/bat_level.sh                                  # Start the script that notifies about low battery
     exec_always --no-startup-id xrandr --dpi 320                                                                    # Set dpi to 220
 	exec_always --no-startup-id nm-applet                                                                           # Start nm-applet by default
     exec_always --no-startup-id /usr/lib/gnome-settings-daemon                                                      # To get the gnome daemon running
     exec_always --no-startup-id bash -c "pgrep -x spotify       || spotify"                                         # Start Spotify
     exec_always --no-startup-id bash -c "pgrep -x slack         || slack"                                           # Start Slack
     exec_always --no-startup-id bash -c "pgrep -x mailspring    || mailspring"                                      # Start MailSpring
-    exec_always --no-startup-id bash -c "pgrep -x dd_spawner.py || '/home/lidor/.config/i3/dd_spawner.py'"          # Start dd_spawner.py
+    exec_always --no-startup-id bash -c "pgrep -x dd_spawner.py || /home/lidor/.config/i3/dd_spawner.py"          # Start dd_spawner.py
+    exec_always --no-startup-id bash -c "pgrep -x bat_level.sh  || $DAEMONS/bat_level.sh"                      # Start the script that notifies about low battery
+    exec_always --no-startup-id bash -c "pgrep -x monitors.sh   || $DAEMONS/monitors.sh"                     # Start monitors.sh (turns on the laptop monitor when it's the only one)
+
     exec_always --no-startup-id bash -c "wmctrl -l | grep 'Jira - Mozilla Firefox' || firefox -new-window https://pagaya.atlassian.net/secure/RapidBoard.jspa?projectKey=DATA"          # Start Jira
-    exec_always --no-startup-id "$HOME/daemons/monitors.sh"
 
 
 ######################################################
 #           Lock, Suspend and other modes:           #
 ######################################################
-
-# -set $Locker python /home/lidor/.config/i3/i3lock_config.py /home/lidor/Pictures/Wallpapers/lock.png
-# -set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-# -mode "$mode_system" {
-# -    bindsym l exec --no-startup-id $Locker, mode "default"
-# -    bindsym e exec --no-startup-id i3-msg exit, mode "default"
-# -    bindsym s exec --no-startup-id $Locker 'systemctl suspend', mode "default"
-# -    bindsym h exec --no-startup-id $Locker && 'systemctl hibernate', mode "default"
-# -    bindsym r exec --no-startup-id systemctl reboot, mode "default"
-# -    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
-
-# -    # back to normal: Enter or Escape
-# -    bindsym Return mode "default"
-# -    bindsym Escape mode "default"
-# -}
- 
-# -bindsym $mod+shift+x mode "$mode_system"
 
 # Set locker for less typing
     set $Locker ~/.config/i3/lock_screen.sh ~/Pictures/Wallpapers/milky_way_12-wallpaper-1920x1080.jpg

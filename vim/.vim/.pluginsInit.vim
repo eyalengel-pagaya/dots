@@ -21,7 +21,7 @@
     " Plugin 'ctrlpvim/ctrlp.vim'
     " Plugin 'benmills/vimux'
     " Plugin 'terryma/vim-multiple-cursors'
-    " Plugin 'tpope/vim-fugitive'
+    Plugin 'tpope/vim-fugitive'
     " Plugin 'git://git.wincent.com/command-t.git'
     " Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 

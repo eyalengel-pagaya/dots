@@ -154,18 +154,19 @@
 
 # On Startup
     exec_always --no-startup-id feh --bg-fill "$WALLPAPERS/spring_tranquility-wallpaper-3840x2160.jpg"
-    exec_always --no-startup-id "setxkbmap -layout us,il && setxkbmap -option 'grp:alt_shift_toggle' & disown"      # Load keymaps
-    exec_always --no-startup-id "compton & disown"                                                                  # Start compton
-    exec_always --no-startup-id "$HOME/.config/polybar/launch_polybar.sh"                                           # Start polybar launcher
-    exec_always --no-startup-id xrandr --dpi 320                                                                    # Set dpi to 220
-	exec_always --no-startup-id nm-applet                                                                           # Start nm-applet by default
-    exec_always --no-startup-id /usr/lib/gnome-settings-daemon                                                      # To get the gnome daemon running
-    exec_always --no-startup-id bash -c "pgrep -x spotify       || spotify"                                         # Start Spotify
-    exec_always --no-startup-id bash -c "pgrep -x slack         || slack"                                           # Start Slack
-    exec_always --no-startup-id bash -c "pgrep -x mailspring    || mailspring"                                      # Start MailSpring
-    exec_always --no-startup-id bash -c "pgrep -x dd_spawner.py || /home/lidor/.config/i3/dd_spawner.py"          # Start dd_spawner.py
-    exec_always --no-startup-id bash -c "pgrep -x bat_level.sh  || $DAEMONS/bat_level.sh"                      # Start the script that notifies about low battery
-    exec_always --no-startup-id bash -c "pgrep -x monitors.sh   || $DAEMONS/monitors.sh"                     # Start monitors.sh (turns on the laptop monitor when it's the only one)
+    exec_always --no-startup-id "setxkbmap -layout us,il && setxkbmap -option 'grp:alt_shift_toggle' & disown"  # Load keymaps
+    exec_always --no-startup-id "compton & disown"                                                              # Start compton
+    exec_always --no-startup-id "$HOME/.config/polybar/launch_polybar.sh"                                       # Start polybar launcher
+    exec_always --no-startup-id xrandr --dpi 320                                                                # Set dpi to 220
+	exec_always --no-startup-id nm-applet                                                                       # Start nm-applet by default
+    exec_always --no-startup-id /usr/lib/gnome-settings-daemon                                                  # To get the gnome daemon running
+    exec_always --no-startup-id bash -c "pgrep -x spotify            || spotify"                                # Start Spotify
+    exec_always --no-startup-id bash -c "pgrep -x slack              || slack"                                  # Start Slack
+    exec_always --no-startup-id bash -c "pgrep -x mailspring         || mailspring"                             # Start MailSpring
+    exec_always --no-startup-id bash -c "pgrep -x dd_spawner.py      || /home/lidor/.config/i3/dd_spawner.py"   # Start dd_spawner.py
+    exec_always --no-startup-id bash -c "pgrep -x bat_level.sh       || $DAEMONS/bat_level.sh"                  # Start the script that notifies about low battery
+    exec_always --no-startup-id bash -c "pgrep -x monitors.sh        || $DAEMONS/monitors.sh"                   # Start monitors.sh (turns on the laptop monitor when it's the only one)
+    exec_always --no-startup-id bash -c "pgrep -x gnome-screensaver  || gnome-screensaver"                      # Start monitors.sh (turns on the laptop monitor when it's the only one)
 
     exec_always --no-startup-id bash -c "wmctrl -l | grep 'Jira - Mozilla Firefox' || firefox -new-window https://pagaya.atlassian.net/secure/RapidBoard.jspa?projectKey=DATA"          # Start Jira
 
@@ -175,7 +176,8 @@
 ######################################################
 
 # Set locker for less typing
-    set $Locker ~/.config/i3/lock_screen.sh ~/Pictures/Wallpapers/milky_way_12-wallpaper-1920x1080.jpg
+    # set $Locker ~/.config/i3/lock_screen.sh ~/Pictures/Wallpapers/milky_way_12-wallpaper-1920x1080.jpg
+    set $Locker gnome-screensaver-command -l
     set $spotify_stop playerctl pause
 
 # Show message telling about all the possible modes

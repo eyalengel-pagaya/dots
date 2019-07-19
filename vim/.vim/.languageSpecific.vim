@@ -47,6 +47,9 @@
 """"""""""""""""
     let g:user_emmet_install_global = 0
 
+    autocmd BufNewFile *.html :execute "0r ~/.vim/skeletons/index.html"
+    autocmd BufNewFile *.html /body
+
     autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript         " Treat tsx and jsx as ts and js
 
     autocmd FileType javascript,typescript,js,jsx,ts,tsx,html nnoremap <buffer> <C-space> /<++><Enter>"_d4l:noh<return>i

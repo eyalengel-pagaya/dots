@@ -158,12 +158,12 @@ vm() {
 
 alias start="vm start"
 alias stop="vm stop"
-alias list_vms="az vm list -g research-remote --query '[].name' --output tsv"
-alias list_active_vms="az vm list -g research-remote -d --query \"[?powerState == 'VM running'].name\" --output tsv"
-alias list_inactive_vms="az vm list -g research-remote -d --query \"[?powerState != 'VM running'].name\" --output tsv "
-alias list_unattached_disks="az disk list -g research-remote --query \"[?diskState == 'Unattached'].name\" --output tsv"
+alias list_vms="az vm list -g research-remote --query '[].name' --output tsv | sort -V"
+alias list_active_vms="az vm list -g research-remote -d --query \"[?powerState == 'VM running'].name\" --output tsv | sort -V"
+alias list_inactive_vms="az vm list -g research-remote -d --query \"[?powerState != 'VM running'].name\" --output tsv | sort -V"
+alias list_unattached_disks="az disk list -g research-remote --query \"[?diskState == 'Unattached'].name\" --output tsv | sort -V"
 
-alias python=python3.6
+# alias python=python3.6
 
 # TODO: Change GitHub repositories aliases from a file to a script that iterates over ~/Work/GitHub/
 # TODO: Add abbreviations

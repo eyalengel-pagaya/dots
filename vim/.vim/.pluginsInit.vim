@@ -15,6 +15,7 @@
     Plugin 'scrooloose/nerdcommenter'
     Plugin 'townk/vim-autoclose'
     Plugin 'godlygeek/tabular'
+    Plugin 'chase/vim-ansible-yaml'
 
     " Plugin 'plasticboy/vim-markdown'
     " Plugin 'neoclide/coc.nvim', {'do': './install.sh nightly'}

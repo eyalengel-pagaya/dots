@@ -30,7 +30,7 @@ else
             # GitHub:
             "gp") $FIREFOX "https://github.com/pagaya" ;;
             "gpr") $FIREFOX "https://github.com/pagaya/research" ;;
-            "gpdd") $FIREFOX "https://github.com/pagaya/data_deployment" ;;
+            "gpdd") $FIREFOX "https://github.com/pagaya/datadeployments" ;;
 
             # Pagaya teamcity:
             "teamcity" | "tc") $FIREFOX "https://teamcity.pagaya-services.com";;
